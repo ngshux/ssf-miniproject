@@ -25,7 +25,7 @@ public class FoodRestController {
     @GetMapping("/list")
     public ResponseEntity<String> getListOfFood(Model model) {
         FoodService foodService = new FoodService();
-        model.addAttribute("list", attributeValue)
+        //model.addAttribute("list", attributeValue)
         return foodService.getListOfFood();
     }
 }
