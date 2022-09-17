@@ -3,9 +3,6 @@ package com.example.ssfminiproject.Model;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ForkJoinPool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,31 +14,67 @@ import jakarta.json.JsonReader;
 
 public class Food {
     private static final Logger logger = LoggerFactory.getLogger(Food.class);
-   
-    private String sentence;
 
-    public static Food getFoodItems(String json) throws IOException{
+    private String name;
+    private String description;
+    private int qty;
+
+    
+
+    public Food() {
+        this.name = "Chicken";
+        this.description = "I like chicken";
+        this.qty = 1;
+    }
+
+    public Food(String name, String description, int qty) {
+        this.name = name;
+        this.description = description;
+        this.qty = qty;
+    }
+
+    public static Food getFoodItems(String json) throws IOException {
         Food f = new Food();
-        try (InputStream is = new ByteArrayInputStream(json.getBytes())){
+        try (InputStream is = new ByteArrayInputStream(json.getBytes())) {
             JsonReader r = Json.createReader(is);
             JsonArray arr = r.readArray();
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject l = arr.getJsonObject(i);
-                f.sentence = l.get("q").toString();
+                f.name = l.get("q").toString();
             }
         }
-        logger.info("Sentence: "+f.sentence);
+        logger.info("Sentence: " + f.name);
         return f;
     }
 
-    public String getSentence() {
-        return sentence;
+    public String getName() {
+        return name;
     }
 
-    public void setSentence(String sentence) {
-        this.sentence = sentence;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    @Override
+    public String toString() {
+        return "Name:" + name;
+    }
     
-}
 
+}

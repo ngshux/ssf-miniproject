@@ -1,33 +1,20 @@
 package com.example.ssfminiproject.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import java.io.StringReader;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.ssfminiproject.Model.Food;
 
 @Service
 public class FoodService {
 
-    @Autowired
-    private FoodRepository foodRepo;
-
-    public Integer count() {
-        return foodRepo.count();
-    }
-
-    public List<String> keys() {
-        return foodRepo.keys();
-    }
-
-    public Optional<Boardgame> getBoardgameById(Integer id) {
-        return getBoardgameById(id.toString());
-    }
-    public Optional<Boardgame> getBoardgameById(String id) {
-        String result = foodRepo.get(id);
-        if (null == result)
-            return Optional.empty();
-
-        return Optional.of(Boardgame.create(result));
+    public ResponseEntity<String> getListOfFood() {
+        final String url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
