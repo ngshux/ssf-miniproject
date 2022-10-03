@@ -23,7 +23,7 @@ public class FoodRestController {
     @Autowired
     FoodService service;
 
-    @GetMapping(path="/{recipeId}")
+    @GetMapping(path="/recipe/{recipeId}")
     public ResponseEntity<Recipe> getMealById(@PathVariable String recipeId) {
         Recipe recipe = service.findById(recipeId);
         return new ResponseEntity<>(recipe, HttpStatus.OK);
