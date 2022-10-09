@@ -44,6 +44,11 @@ public class FoodController {
         return "favourites";
     }
 
+    @GetMapping("/favourites")
+    public String favPage(Model model){
+        return "favourites";
+    }
+
     @GetMapping(path="/recipe/{recipeId}")
     public String recipePage(Model model, @PathVariable String recipeId){
         System.out.println(recipeId);
@@ -52,4 +57,5 @@ public class FoodController {
         model.addAttribute("recipe", recipe);
         return "recipe";
     }
+
 }

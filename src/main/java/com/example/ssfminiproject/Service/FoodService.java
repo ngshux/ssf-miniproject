@@ -41,8 +41,7 @@ public class FoodService {
         JsonArray jsonArray = jsonObject1.getJsonArray("meals");
         List<String> ingredientList = new ArrayList<>();
         List<String> measureList = new ArrayList<>();
-        //System.out.println(jsonArray.getJsonObject(0).get("strIngredient1").toString());
-        System.out.println(jsonArray.size());
+
         JsonObject l = jsonArray.getJsonObject(0);
         recipe.setStrMeal(l.get("strMeal").toString().substring(1, l.get("strMeal").toString().length() - 1));
         recipe.setStrMealThumb(l.get("strMealThumb").toString().substring(1, l.get("strMealThumb").toString().length() - 1));
@@ -50,7 +49,6 @@ public class FoodService {
         String[] instructions =(l.get("strInstructions").toString().substring(1, l.get("strInstructions").toString().length() - 1)).split("\\.");
         recipe.setInstructions(instructions);
 
-        System.out.println("hi");
         for (int j = 1; j < 21; j++) {
             String ingredientIndex = "strIngredient" + (j);
             String measureIndex = "strMeasure" + (j);

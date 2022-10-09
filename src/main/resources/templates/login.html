@@ -7,6 +7,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     </head>
 <body>
+<!-- Nav bar -->
+<nav class="navbar navbar-light bg-info">
+    <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
+    <a class="kbd navbar-brand lead" th:href="@{/favourites}"> My Favourites</a>
+    </div>
+  </nav>
+
     <form action="#" th:action="@{/login}" th:object="${user}" method="post">
     	<p>Name: <input type="text" th:field="*{name}" /></p>
         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

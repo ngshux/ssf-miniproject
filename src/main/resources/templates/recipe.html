@@ -8,18 +8,51 @@
 
 </head>
 <body>
+<!-- Nav bar -->
+<nav class="navbar navbar-light bg-info">
+    <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
+    <a class="kbd navbar-brand lead" th:href="@{/favourites}"> My Favourites</a>
+    </div>
+  </nav>
+
 <div class="container">
+    <br><br>
+    <div class="row" >
+        <h1><span th:text="${recipe.strMeal}"></span>
+        </h1>
+    </div><br>
     <div class="row">
         <div class="col-sm">
-            <img th:src="${recipe.getStrMealThumb()}" class="img-fluid" />
+            <img th:src="${recipe.getStrMealThumb()}" class="img-fluid" /><br><br>
+                <!-- Button trigger modal -->
+                <button type="button" th:action = "@{/favourited}" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: block; margin: 0 auto;">
+                    Favourite This!
+                    </button>
+    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" th:text="${recipe.strMeal}"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img th:src="${recipe.getStrMealThumb()}"class="img-fluid"/>
+                            <center>Added to Favourites!</center>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a href="#" th:href="@{/favourites}">                      
+                                <button type="button" class="btn btn-info">Go to Favourites</button>
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+    
         </div>
-        <div class="col-sm">
-            <br>
+        <div class="col-sm"> 
             <div class = "row text-uppercase">
-                <h1><span th:text="${recipe.strMeal}"></span>
-                </h1>
-            </div>
-            <br><br><br>
             <div class="row text-center"><h3>Ingredients!</h3></div>
             <div class="row">
                 <div class = "col text-end">
@@ -34,22 +67,14 @@
                 </div>
             </div>
         </div>
-    </div><br><br>
-            <!-- Button trigger modal -->
-            <form id = "favouriteButton" th:action = "@{/favourites}"  method="post">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    Favourite!
-                    <br/>
-                <input type="button" value="Continue to schedule" class="btn btn-blue" />
-                </div>
-            
-            </form>
-    <br>
+    </div>
+    
     <div class="container">
+        <div class="row"><br></div>
         <div class="row">
-            <ol class="col-sm">
+            <ol class="col-sm-12">
                 <h3>Instructions</h3>
-                <li th:each="instructionList: ${recipe.getInstructions()}" class="col">
+                <li th:each="instructionList: ${recipe.getInstructions()}" class="col-sm-10 offset-1">
                     <div th:text="${instructionList}"></div>
                 </li>
             </ol>
