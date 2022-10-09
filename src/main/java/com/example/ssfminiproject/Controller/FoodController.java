@@ -47,7 +47,7 @@ public class FoodController {
         user.setName(name);
         service.addUser(user);
         user.setLoggedIn(true);
-        model.addAttribute(user);
+        model.addAttribute("user",user);
         return "favourites";
     }
 
