@@ -34,31 +34,18 @@ public class FoodRedis implements FoodInterface{
     @Resource(name="redisTemplate")     
     private SetOperations<String, Meal> setOperations;
 
-    @Override
-    public Map<Integer, User> getAllUsers() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public User getUser(String username) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     public void login(String username) {
-        System.out.println("hello hohoho" + username);
     }
 
     @Override
     public boolean addUser(User user) {
-        System.out.println("adding user:" + user.getName());
         hashOperations.putIfAbsent("user:" + user.getName(), "user", user.getName());
         return false;
     }
 
     @Override
     public boolean addRecipeToFavourite(User user, Meal meal) {
+        System.out.println(meal);
         //hash.putIfAbsent();
         return setOperations.add("user:shux", meal) == 1 ? true : false;
     }
