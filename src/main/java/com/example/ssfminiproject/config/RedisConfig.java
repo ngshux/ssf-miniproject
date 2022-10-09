@@ -35,7 +35,6 @@ public class RedisConfig {
     private String redisPassword;
 
     @Bean
-    @Scope("singleton")
     public RedisTemplate<String, Object> redisTemplate() {
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
@@ -50,6 +49,8 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate();
         template.setConnectionFactory(jedisFac);
         template.setKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(new StringRedisSerializer());
 
         RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
         template.setValueSerializer(

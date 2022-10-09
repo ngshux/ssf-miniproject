@@ -10,9 +10,19 @@
 <!-- Nav bar -->
 <nav class="navbar navbar-light bg-info">
     <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
-    <a class="kbd navbar-brand lead" th:href="@{/favourites}"> My Favourites</a>
-    </div>
+    <a class="kbd navbar-brand lead" th:href="@{/favourites}">
+        My Favourites</a>
   </nav>
+    <div class="container text-center">
+        <div class="row row-cols-4">
+            <div th:each="reciped:${favList}" class="col">
+                <a href="#" th:href="@{/recipe/{recipeId}(recipeId=${reciped.idMeal})}">
+                    <img th:src="${reciped.strMealThumb}" class="img-thumbnail"/>
+                </a>
+                <div th:text="${reciped.strMeal}"></div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

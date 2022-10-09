@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Recipe {
@@ -128,11 +130,18 @@ public class Recipe {
         this.measures = measures;
     }
 
-    public String[] getInstructions() {
-        return instructions;
+    public List<String> getInstructions() {
+        List<String> newInstructionList = new ArrayList<>();
+        for (int i = 0; i < instructions.length; i++) {
+            newInstructionList.add(instructions[i].replaceAll("(\\\\r\\\\n|\\\\n)", ""));
+        }
+        System.out.println(Arrays.toString(newInstructionList.toArray()));
+
+        return newInstructionList;
     }
 
     public void setInstructions(String[] instructions) {
         this.instructions = instructions;
     }
+
 }
