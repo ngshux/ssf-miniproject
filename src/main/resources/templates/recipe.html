@@ -17,6 +17,9 @@
     <nav class="navbar navbar-light bg-info">
         <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
         <a class="kbd navbar-brand lead" th:href="@{/favourites}"> My Favourites</a>
+        <form class="form1" th:action="@{/logout}" th:object="${user}" method="post">
+            <button type="submit" class="kbd navbar-brand" align="center" value="submit">Log out</button>
+          </form>
         </div>
     </nav>
 

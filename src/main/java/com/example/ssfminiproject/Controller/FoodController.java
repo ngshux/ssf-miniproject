@@ -51,6 +51,12 @@ public class FoodController {
         return "favourites";
     }
 
+    @PostMapping (path="/logout")
+    public String logout(Model model) {
+        user.setLoggedIn(false);
+        return "favourites";
+    }
+
     @PostMapping (path="/addToFav")
     public String addToFav(@ModelAttribute("user") User user, @RequestParam String strMeal,
     @RequestParam String strMealThumb, @RequestParam String idMeal) {

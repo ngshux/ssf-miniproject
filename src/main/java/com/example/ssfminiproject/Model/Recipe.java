@@ -135,8 +135,6 @@ public class Recipe {
         for (int i = 0; i < instructions.length; i++) {
             newInstructionList.add(instructions[i].replaceAll("(\\\\r\\\\n|\\\\n)", ""));
         }
-        System.out.println(Arrays.toString(newInstructionList.toArray()));
-
         return newInstructionList;
     }
 

@@ -10,16 +10,13 @@
 <!-- Nav bar -->
 <nav class="navbar navbar-light bg-info">
     <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
-
-        <div th:if="${user.loggedIn}"> 
-            <a class="kbd navbar-brand lead" th:href="@{/favourites}"> 
-            <div th:text="${user.name}"></div>
-        </div>
-        <div th:unless="${user.loggedIn}">
-            <a class="kbd navbar-brand lead" th:href="@{/login}"> 
-            Login
-        </div>
-    </a>
+    <div th:if="${user.loggedIn}"> 
+        <a class="kbd navbar-brand lead" th:href="@{/favourites}"> 
+        <div th:text="${user.name}"></div></a>
+    </div>
+    <div th:unless="${user.loggedIn}">
+        <a class="kbd navbar-brand lead" th:href="@{/login}"> 
+        Login</a>
     </div>
   </nav>
 
