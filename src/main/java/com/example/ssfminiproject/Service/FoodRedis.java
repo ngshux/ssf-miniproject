@@ -25,7 +25,7 @@ import com.example.ssfminiproject.Model.User;
 
 @Service
 @Repository
-public class FoodRedis implements FoodInterface{
+public class FoodRedis {
     private static final Logger logger = LoggerFactory.getLogger(FoodRedis.class);
 
     @Resource(name="redisTemplate")     
@@ -37,29 +37,19 @@ public class FoodRedis implements FoodInterface{
     public void login(String username) {
     }
 
-    @Override
-    public boolean addUser(User user) {
-        hashOperations.putIfAbsent("user:" + user.getName(), "user", user.getName());
-        return false;
-    }
-
-    @Override
     public boolean addRecipeToFavourite(User user, Meal meal) {
         System.out.println(meal);
         //hash.putIfAbsent();
-        return setOperations.add("user:shux", meal) == 1 ? true : false;
+        return setOperations.add("user:" + user.getName(), meal) == 1 ? true : false;
     }
 
-    public List<Meal> getFavourites() {
-        Meal meal = new Meal("hello", "hello", "hello");
-        Set<Meal> favMeals = setOperations.members("user:shux");
+    public boolean removeFromFavourite(User user, Meal meal) {
+        return setOperations.remove("user:" + user.getName(), meal) == 1 ? true : false;
+    }
+
+    public List<Meal> getFavourites(User user) {
+        Set<Meal> favMeals = setOperations.members("user:" + user.getName());
         return new ArrayList<>(favMeals);
-    }
-
-    @Override
-    public boolean checkFavourite(User user, int foodId) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
 }
