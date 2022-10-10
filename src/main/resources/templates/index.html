@@ -12,11 +12,23 @@
 <body>
 <!--<body style="font-family: Rubik;">-->
 <!-- Nav bar -->
-    <nav class="navbar navbar-light bg-info">
-        <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
-
+<nav class="navbar navbar-light bg-info">
+    <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
+    <div th:if="${user.isLoggedIn()}" class="row">
+        <a class="kbd navbar-brand lead col" th:href="@{/favourites}">
+            <div class="p-1" th:text="${user.getName()}"></div></a>
+        <div class="col">
+            <form action="#" th:action="@{/logout}" th:object="${user}" method="post">
+                <button class="btn btn-info btn-lg btn-block" type="submit">Logout</button>
+            </form>
         </div>
-      </nav>
+    </div>
+    <div th:if="${!user.isLoggedIn()}">
+        <a class="kbd navbar-brand lead" th:href="@{/login}">
+            Login</a>
+    </div>
+
+</nav>
 
 
     <div class="container my-2" align="center">

@@ -10,16 +10,35 @@
 <!-- Nav bar -->
 <nav class="navbar navbar-light bg-info">
     <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
+    <div th:if="${user.isLoggedIn()}" class="row">
+        <a class="kbd navbar-brand lead col" th:href="@{/favourites}">
+            <div class="p-1" th:text="${user.getName()}"></div></a>
+        <div class="col">
+            <form action="#" th:action="@{/logout}" th:object="${user}" method="post">
+                <button class="btn btn-info btn-lg btn-block" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+    <div th:if="${!user.isLoggedIn()}">
+        <a class="kbd navbar-brand lead" th:href="@{/login}">
+            Login</a>
+    </div>
 
-
-  </nav>
+</nav>
     <div class="container text-center">
+        <div class = "p-3"> Your Favourite Recipes!</div>
         <div class="row row-cols-4">
             <div th:each="reciped:${favList}" class="col">
                 <a href="#" th:href="@{/recipe/{recipeId}(recipeId=${reciped.idMeal})}">
                     <img th:src="${reciped.strMealThumb}" class="img-thumbnail"/>
                 </a>
                 <div th:text="${reciped.strMeal}"></div>
+                <form action="#" th:action="@{/removeFavourite}" th:object="${recipe}" method="post">
+                    <input type="hidden" name="strMeal" th:value="${reciped.strMeal}">
+                    <input type="hidden" name="strMealThumb" th:value="${reciped.strMealThumb}">
+                    <input type="hidden" name="idMeal" th:value="${reciped.idMeal}">
+                    <button class="btn btn-info" align="left" type="submit">Remove</button>
+                </form>
             </div>
         </div>
     </div>

@@ -10,26 +10,32 @@
 <!-- Nav bar -->
 <nav class="navbar navbar-light bg-info">
     <a class="navbar-brand p-3" href="/">SOME RECIPES</a>
-    <div th:if="${user.loggedIn}"> 
-        <a class="kbd navbar-brand lead" th:href="@{/favourites}"> 
-        <div th:text="${user.name}"></div></a>
+    <div th:if="${user.isLoggedIn()}" class="row">
+        <a class="kbd navbar-brand lead col" th:href="@{/favourites}">
+            <div class="p-1" th:text="${user.getName()}"></div></a>
+        <div class="col">
+            <form action="#" th:action="@{/logout}" th:object="${user}" method="post">
+                <button class="btn btn-info btn-lg btn-block" type="submit">Logout</button>
+            </form>
+        </div>
     </div>
-    <div th:unless="${user.loggedIn}">
-        <a class="kbd navbar-brand lead" th:href="@{/login}"> 
-        Login</a>
+    <div th:if="${!user.isLoggedIn()}">
+        <a class="kbd navbar-brand lead" th:href="@{/login}">
+            Login</a>
     </div>
-  </nav>
+
+</nav>
 
     <section class="vh-100">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-6 text-black">
               <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                <form style="width: 23rem;" action="#" th:action="@{/login}" th:object="${user}" method="post">
+                <form style="width: 23rem;" action="#" th:action="@{/submitLogin}" th:object="${user}" method="post">
                   <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
                   <div class="form-outline mb-4">
-                    <input type="text" th:field="*{name}" id="form2Example18" class="form-control form-control-lg" />
-                    <label class="form-label" for="form2Example18">Username</label>
+                      <label class="form-label" for="form2Example18">Username</label>
+                      <input type="text" name="strMeal" th:field="*{name}" id="form2Example18" class="form-control form-control-lg" />
                   </div>
                   <div class="pt-1 mb-4">
                     <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
