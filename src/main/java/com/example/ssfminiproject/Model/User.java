@@ -16,4 +16,12 @@ public class User {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", loggedIn=" + loggedIn +
+                '}';
+    }
 }

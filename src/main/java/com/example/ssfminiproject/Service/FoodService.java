@@ -45,7 +45,7 @@ public class FoodService {
         JsonObject l = jsonArray.getJsonObject(0);
         recipe.setStrMeal(l.get("strMeal").toString().substring(1, l.get("strMeal").toString().length() - 1));
         recipe.setStrMealThumb(l.get("strMealThumb").toString().substring(1, l.get("strMealThumb").toString().length() - 1));
-
+        recipe.setIdMeal(l.get("idMeal").toString().substring(1, l.get("idMeal").toString().length() - 1));
         String[] instructions =(l.get("strInstructions").toString().substring(1, l.get("strInstructions").toString().length() - 1)).split("\\.");
         recipe.setInstructions(instructions);
 

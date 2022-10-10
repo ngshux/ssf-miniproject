@@ -37,7 +37,6 @@ public class FoodController {
 
     @GetMapping(path="/login")
     public String loginPage(Model model){
-        System.out.println("i am here");
         User user = new User();
         model.addAttribute("user", user);
         return "login";
@@ -72,7 +71,6 @@ public class FoodController {
 
     @GetMapping("/favourites")
     public String favPage(Model model){
-        System.out.println(service.getFavourites(user));
         model.addAttribute("user", user);
         if(user.isLoggedIn()) {
             model.addAttribute("favList", service.getFavourites(user));
@@ -84,7 +82,6 @@ public class FoodController {
     @PostMapping (path="/removeFavourite")
     public String removeFromFav(@RequestParam String strMeal,
                                 @RequestParam String strMealThumb, @RequestParam String idMeal) {
-        System.out.println(idMeal);
         Meal meal = new Meal(strMeal, strMealThumb, idMeal);
 
         service.removeFromFavourite(user, meal);
@@ -95,7 +92,6 @@ public class FoodController {
     public String recipePage(Model model, @PathVariable String recipeId){
         FoodService foodService = new FoodService();
         Recipe recipe = foodService.findById(recipeId);
-        System.out.println(recipe);
         model.addAttribute("recipe", recipe);
         model.addAttribute("user", user);
         return "recipe";

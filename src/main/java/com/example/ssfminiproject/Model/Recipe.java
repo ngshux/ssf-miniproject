@@ -104,7 +104,6 @@ public class Recipe {
 
     public static <T> void inspect(Class<T> recipe) {
         Field[] fields = recipe.getDeclaredFields();
-        System.out.printf("%d fields:%n", fields.length);
         for (Field field : fields) {
             System.out.printf("%s %s %s%n",
                     Modifier.toString(field.getModifiers()),
@@ -130,6 +129,10 @@ public class Recipe {
         this.measures = measures;
     }
 
+    public String getIngredientsAndMeasure(int index) {
+        return ingredients.get(index) + " " + measures.get(index);
+    }
+
     public List<String> getInstructions() {
         List<String> newInstructionList = new ArrayList<>();
         for (int i = 0; i < instructions.length; i++) {
@@ -141,5 +144,7 @@ public class Recipe {
     public void setInstructions(String[] instructions) {
         this.instructions = instructions;
     }
+
+
 
 }
